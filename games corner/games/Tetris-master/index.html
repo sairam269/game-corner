@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tetris</title>
+
+	<link rel="stylesheet" href="css/styles.css">
+	<script type="text/javascript">
+  var keys = {};
+window.addEventListener("keydown",
+    function(e){
+        keys[e.keyCode] = true;
+        switch(e.keyCode){
+            case 37: case 39: case 38:  case 40: // Arrow keys
+            case 32: e.preventDefault(); break; // Space
+            default: break; // do not block other keys
+        }
+    },
+false);
+window.addEventListener('keyup',
+    function(e){
+        keys[e.keyCode] = false;
+    },
+false);  
+</script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+
+</head>
+<body>
+<div id="tetris">
+	<canvas id="scene"></canvas>
+	<div id="gameOver">
+		<h1>Game Over !</h1>
+		<h3>Score: <span id="finalScore">0</span></h3>
+		<h2><a href="#" id="restart">Restart</a></h2>
+		
+	</div>
+	<div id="side">
+		<div id="info">
+			<h1 id="levelInfo">Level: <br><span id="level">1</span></h1>
+			<h2 id="scoreInfo">Score: <br><span id="score" >0</span></h2>
+			<div id="rewardInfo" class="invisible">+<span id="reward">0</span></div>
+			<canvas id="preview"></canvas>
+		</div>
+	</div>
+</div>
+
+
+</body>
+<script src="dist/tetris.js"></script>
+<script>
+	(function(){
+		var tetris = new Tetris('tetris');
+		tetris.start();
+	})();
+</script>
+</html>
